@@ -45,11 +45,11 @@ const Player = ({ globalCurrentSongId, setGlobalCurrentSongId, globalIsTrackPlay
                 if (response.status == 204) {
                     setGlobalIsTrackPlaying(false)
                 }
-                if(response.status==403)
-                {
-                    console.log("hello")
-                    console.log("error" , data.error.message)
-                }
+                // if(response.status==403)
+                // {
+                //     console.log("hello")
+                //     console.log("error" , data.error.message)
+                // }
             } else {
                 const response = await fetch("https://api.spotify.com/v1/me/player/play", {
                     method: "PUT",

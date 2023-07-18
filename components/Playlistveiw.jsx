@@ -16,6 +16,8 @@ const colors = [
   'from-purple-500'
 ]
 
+
+
 export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId, setGlobalIsTrackPlaying, setView, setGlobalArtistId }) {
   const { data: session } = useSession()
   const [hover, setHover] = useState(false)
@@ -23,6 +25,7 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
   const [color, setColor] = useState(null)
   const [opacity, setOpacity] = useState(0)
   const [textOpacity, setTextOpacity] = useState(0)
+
 
   function changeOpacity(scrollPos) {
     // scrollPos = 0 -> opacity = 0 
@@ -43,6 +46,7 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
   }
 
   useEffect(() => {
+
     async function f() {
       if (session && session.accessToken) {
         const res = await fetch(`https://api.spotify.com/v1/playlists/${globalPlaylistId}`, {
@@ -54,6 +58,8 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
         setPlaylistData(data)
       }
     }
+
+
     f()
   }, [session, globalPlaylistId])
 
