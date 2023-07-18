@@ -2,6 +2,7 @@
 import Player from '@/components/Player'
 import Playlistveiw from '@/components/Playlistveiw'
 import Sidebar from '@/components/Sidebar'
+import Library from '@/components/Library'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
@@ -29,7 +30,7 @@ export default function Home() {
           setGlobalCurrentSongId={setGlobalCurrentSongId}
           setGlobalIsTrackPlaying={setGlobalIsTrackPlaying}
         />}
-       
+
         {view === "library" && <Library
           setView={setView}
           setGlobalPlaylistId={setGlobalPlaylistId}
@@ -38,12 +39,18 @@ export default function Home() {
           setView={setView}
           globalArtistId={globalArtistId}
           setGlobalArtistId={setGlobalArtistId}
-          // setGlobalCurrentSongId={setGlobalCurrentSongId}
-          // setGlobalIsTrackPlaying={setGlobalIsTrackPlaying}
+        // setGlobalCurrentSongId={setGlobalCurrentSongId}
+        // setGlobalIsTrackPlaying={setGlobalIsTrackPlaying}
         />}
       </div>
-      <div className='sticky flex bottom-0  justify-center items-center z-10 bg-white text-black h-24'> <Player /></div>
-    </main>
+      <div className="sticky z-20 bottom-0 w-full">
+        <Player
+          globalCurrentSongId={globalCurrentSongId}
+          setGlobalCurrentSongId={setGlobalCurrentSongId}
+          setGlobalIsTrackPlaying={setGlobalIsTrackPlaying}
+          globalIsTrackPlaying={globalIsTrackPlaying}
+        />
+      </div>    </main>
   )
 }
 

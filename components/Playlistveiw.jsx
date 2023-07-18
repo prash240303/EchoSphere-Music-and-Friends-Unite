@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { shuffle } from 'lodash';
 import he from 'he';
+import { LuClock3 } from "react-icons/lu"
 
 import Song from './Songs';
 const colors = [
@@ -15,16 +16,13 @@ const colors = [
   'from-purple-500'
 ]
 
-
-
 export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId, setGlobalIsTrackPlaying, setView, setGlobalArtistId }) {
   const { data: session } = useSession()
   const [hover, setHover] = useState(false)
-const [playlistData, setPlaylistData] = useState(null)
+  const [playlistData, setPlaylistData] = useState(null)
   const [color, setColor] = useState(null)
   const [opacity, setOpacity] = useState(0)
   const [textOpacity, setTextOpacity] = useState(0)
-
 
   function changeOpacity(scrollPos) {
     // scrollPos = 0 -> opacity = 0 
@@ -45,7 +43,6 @@ const [playlistData, setPlaylistData] = useState(null)
   }
 
   useEffect(() => {
-
     async function f() {
       if (session && session.accessToken) {
         const res = await fetch(`https://api.spotify.com/v1/playlists/${globalPlaylistId}`, {
@@ -57,8 +54,6 @@ const [playlistData, setPlaylistData] = useState(null)
         setPlaylistData(data)
       }
     }
-
-
     f()
   }, [session, globalPlaylistId])
 
@@ -69,7 +64,8 @@ const [playlistData, setPlaylistData] = useState(null)
 
 
   const processDesc = he.decode(playlistData?.description || " ")
-  
+
+
 
   return (
     <div className='flex-grow h-screen'>
@@ -79,8 +75,8 @@ const [playlistData, setPlaylistData] = useState(null)
           <p>{playlistData?.name}</p>
         </div>
       </header>
-      
-      
+
+
       <div className='absolute z-20 top-3 right-8 flex items-center justify-center bg-black bg-opacity-70 text-white px-2 pr-3 py-2 gap-2 opacity-90 hover:opacity-80 cursor-pointer rounded-full '>
         <img className='rounded-full w-7   h-7' src={session?.user.image} alt="profile pic" />
         <p className='text-sm font-semibold leading-normal'>Logout</p>
@@ -94,15 +90,19 @@ const [playlistData, setPlaylistData] = useState(null)
             <p className='text-sm font-bold'>Playlist</p>
             <h1 className='text-2xl md:text-3xl lg:text-5xl font-extrabold mb-5'>{playlistData?.name}</h1>
             <span className='text-normal block text-lg mb-2 text-neutral-300'> {processDesc}</span>
-            <span  className='text-sm font-semibold px-2 hover:underline'>{playlistData?.owner.display_name} •</span>
-            <span  className='text-sm font-semibold'>{playlistData?.followers.total} {playlistData?.followers.total>1?"Likes":"Like"} • </span>
+            <span className='text-sm font-semibold px-2 hover:underline'>{playlistData?.owner.display_name} •</span>
+            <span className='text-sm font-semibold'>{playlistData?.followers.total} {playlistData?.followers.total > 1 ? "Likes" : "Like"} • </span>
             <span className='text-sm font-semibold'>{playlistData?.tracks.total} songs, </span>
             <span className='text-sm font-semibold'></span>
-
-
           </div>
         </section>
-        <div className='text-white px-8 flex flex-col space-y-1 pb-28'>
+        <div className='flex gap-8  text-white  border-b border-gray-700 mx-10 mb-2 pb-5 '>
+          <p>#</p>
+          <p className=' mr-[30rem]'>Title</p>
+          <p className=' mr-[30rem]'>Album</p>
+          <p><LuClock3 /></p>
+        </div>
+        <div className='text-white px-8 flex flex-col space-y-1  pb-28'>
           {playlistData?.tracks.items.map((track, i) => {
             // song component
             return <Song
