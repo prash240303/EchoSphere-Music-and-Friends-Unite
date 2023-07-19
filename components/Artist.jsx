@@ -5,7 +5,6 @@ import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { shuffle } from 'lodash';
 import { PlayIcon } from '@heroicons/react/24/solid';
 import { LuVerified } from 'react-icons/lu';
-
 const colors = [
   'from-indigo-500',
   'from-blue-500',
@@ -24,7 +23,7 @@ const Artist = ({ setView, globalArtistId, setGlobalArtistId, setGlobalCurrentSo
   const [artistData, setArtistData] = useState(null)
   const [topTracks, setTopTracks] = useState([])
   const [relatedArtists, setRelatedArtists] = useState([])
-
+  const [artistAlbums, setArtistAlbums] = useState([])
   function changeOpacity(scrollPos) {
     // scrollPos = 0 -> opacity = 0 
     // scrollPos = 300 -> opacity = 1, textOpacity = 0
@@ -73,12 +72,24 @@ const Artist = ({ setView, globalArtistId, setGlobalArtistId, setGlobalCurrentSo
     return data.artists
   }
 
+  async function getArtistAlbum() {
+    const response = await fetch(`https://api.spotify.com/v1/artists/${globalArtistId}/albums`, {
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`
+      }
+    })
+    const data = await response.json()
+    return data.items
+  }
+
+
   useEffect(() => {
     async function f() {
       if (session && session.accessToken) {
         setArtistData(await getArtistData())
         setTopTracks(await getTopTracks())
         setRelatedArtists(await getRelatedArtists())
+        setArtistAlbums(await getArtistAlbum())
       }
     }
     f()
@@ -88,6 +99,21 @@ const Artist = ({ setView, globalArtistId, setGlobalArtistId, setGlobalCurrentSo
     setColor(shuffle(colors).pop())
   }, [globalArtistId])
 
+  async function handleFollow(id) {
+    // if (session && session.accessToken) {
+
+    //   const response = await fetch("https://api.spotify.com/v1/me/following", {
+    //     method: "PUT",
+    //     headers: {
+    //       Authorization: `Bearer ${session.accessToken}`
+    //     },
+    //     body: JSON.stringify({
+    //       ids: [albums.id]
+    //     })
+    //   })
+
+    // }
+  }
 
   return (
     <div className='flex-grow h-screen'>
@@ -114,9 +140,15 @@ const Artist = ({ setView, globalArtistId, setGlobalArtistId, setGlobalCurrentSo
               <p className=' inlinetext-base  font-bold text-gray-100 '>Verified Artist</p>
             </div>
             <h1 className='text-2xl md:text-3xl  lg:text-5xl  text-gray-100 font-extrabold'>{artistData?.name}</h1>
-            <p className='text-lg    '>{artistData?.followers.total.toLocaleString()}  monthly listeners</p>
+            <p className='text-lg'>{artistData?.followers.total.toLocaleString()}  monthly listeners</p>
           </div>
         </section>
+
+        <div className='space-y-4 flex items-start justify-start gap-10 px-8 mb-4'>
+
+          <PlayIcon className=' w-14 h-14 text-black bg-green-500 rounded-full p-2' />
+          <div onClick={handleFollow(globalArtistId)} className='px-3 py-1 border w-fit border-white rounded-full'>Follow</div>
+        </div>
         <div className='space-y-4'>
           <h2 className='text-xl font-bold px-8'>Top tracks</h2>
           <div className='text-white px-8 flex flex-col space-y-1 pb-6'>
@@ -134,19 +166,47 @@ const Artist = ({ setView, globalArtistId, setGlobalArtistId, setGlobalCurrentSo
             })}
           </div>
         </div>
-        <div className='space-y-4'>
-          <h2 className='text-xl font-bold px-8'>Related artists</h2>
-          <div className='flex flex-wrap gap-4 px-8 pb-28'>
-            {relatedArtists.slice(0, 4).map((artist) => {
-              return <div onClick={() => setGlobalArtistId(artist.id)} key={artist.id} className='cursor-pointer relative group w-56 mb-2 bg-neutral-800 hover:bg-neutral-600 rounded-md p-4'>
-                <div className='absolute opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-200 shadow-2xl shadow-neutral-900 z-10 h-12 w-12 flex items-center justify-center rounded-full bg-green-500 top-[156px] group-hover:top-[148px] right-6'>
-                  <PlayIcon className='h-6 w-6 text-black' />
+        <div className='my-10'>
+          <h2 className='text-2xl font-bold mb-8 px-8'>Related artists</h2>
+          <div className='px-8 w-screen scrollbar-hide  firefox-scrollbar overflow-x-scroll'>
+            <div className='flex gap-4'>
+              {relatedArtists.map((artist) => (
+                <div
+                  onClick={() => setGlobalArtistId(artist.id)}
+                  key={artist.id}
+                  className='cursor-pointer relative group w-56 mb-2 bg-neutral-800 hover:bg-neutral-600 rounded-md p-4'
+                >
+                  <div className='absolute opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-200 shadow-2xl shadow-neutral-900 z-10 h-12 w-12 flex items-center justify-center rounded-full bg-green-500 top-[156px] group-hover:top-[148px] right-6'>
+                    <PlayIcon className='h-6 w-6 text-black' />
+                  </div>
+                  <img className='w-48 h-48 mb-4 rounded-full' src={artist.images[0].url} />
+                  <p className='text-base text-white mb-1 w-48 truncate'>{artist.name}</p>
+                  <p className='text-sm text-neutral-400 mb-8 w-48 truncate'>Artist</p>
                 </div>
-                <img className='w-48 h-48 mb-4 rounded-full' src={artist.images[0].url} />
-                <p className='text-base text-white mb-1 w-48 truncate'>{artist.name}</p>
-                <p className='text-sm text-neutral-400 mb-8 w-48 truncate'>Artist</p>
-              </div>
-            })}
+              ))}
+            </div>
+          </div>
+
+        </div>
+        <div className='space-y-4 mb-30'>
+          <h2 className='text-2xl font-bold px-8'>Discography</h2>
+          <div className='px-8 w-screen scrollbar-hide  firefox-scrollbar overflow-x-scroll'>
+            <div className='flex gap-4'>
+              {artistAlbums.map((albums) => (
+                <div
+                  // onClick={() => setGlobalArtistId(albums.id)}
+                  key={albums.id}
+                  className='cursor-pointer relative group w-56 mb-2 bg-neutral-800 hover:bg-neutral-600 rounded-md p-4'
+                >
+                  <div className='absolute opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-200 shadow-2xl shadow-neutral-900 z-10 h-12 w-12 flex items-center justify-center rounded-full bg-green-500 top-[156px] group-hover:top-[148px] right-6'>
+                    <PlayIcon className='h-6 w-6 text-black' />
+                  </div>
+                  <img className='w-48 h-48 mb-4 ' src={albums.images[0].url} />
+                  <p className='text-base text-white mb-1 w-48 truncate'>{albums.name}</p>
+                  <p className='text-sm text-neutral-400 mb-8 w-48'>{albums.release_date.slice(0, 4)} • {albums.album_group.charAt(0).toUpperCase() + albums.album_group.slice(1).toLowerCase()}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

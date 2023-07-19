@@ -37,3 +37,24 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+/* CSS */
+.scrollbar-hide ::-webkit-scrollbar{
+display: none;
+}
+
+.firefox-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.firefox-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.firefox-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.firefox-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
