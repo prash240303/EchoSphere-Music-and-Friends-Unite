@@ -50,7 +50,7 @@ const Song = ({ sno, track, setGlobalCurrentSongId, setGlobalIsTrackPlaying, set
                             track.artists.map((artist, i) => {
                                 return (
                                     <>
-                                        <span onClick={() => selectArtist(artist)} className='hover:underline'>{artist.name}</span>
+                                        <span onClick={() => selectArtist(artist)} className='hover:underline' >{artist.name}</span>
                                         <span>{i != track.artists.length - 1 ? ", " : null}</span>
                                     </>
                                 )

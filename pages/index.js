@@ -3,6 +3,7 @@ import Player from '@/components/Player'
 import Playlistveiw from '@/components/Playlistveiw'
 import Sidebar from '@/components/Sidebar'
 import Library from '@/components/Library'
+import Artist from "@/components/Artist"
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 
