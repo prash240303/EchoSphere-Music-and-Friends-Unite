@@ -33,15 +33,15 @@ const Sidebar = ({ view, setView, setGlobalPlaylistId }) => {
         <div className='mt-1 mb-5'>
           <SpotifySVG />
         </div>
-        <button className='flex items-center space-x-2 hover:text-white'>
+        <button  onClick={() => setView("home")} className={`flex items-center ${view=='home'? 'text-white font-semibold': ''} space-x-2 hover:text-white`}>
           <BiHomeAlt className='h-5 w-5' />
           <p>Home</p>
         </button>
-        <button onClick={() => setView("search")} className={`flex items-center space-x-2 hover:text-white ${view == "search" ? "text-white" : null}`}>
+        <button onClick={() => setView("search")}  className={`flex items-center ${view=='search'? 'text-white font-semibold': ''} space-x-2 hover:text-white`}>
           <BiSearch className='h-5 w-5' />
           <p>Search</p>
         </button>
-        <button onClick={() => setView("library")} className={`flex items-center space-x-2 hover:text-white ${view == "library" ? "text-white" : null}`}>
+        <button onClick={() => setView("library")}  className={`flex items-center ${view=='library'? 'text-white font-semibold': ''} space-x-2 hover:text-white`}>
           <BiLibrary className='h-5 w-5' />
           <p>Your Library</p>
         </button>

@@ -17,6 +17,7 @@ const params = {
 const LOGIN_URL = "https://accounts.spotify.com/authorize?" + new URLSearchParams(params).toString();
 
 async function refreshAccessToken(token) {
+    console.log("refreshing the access token")
     const params = new URLSearchParams()
     params.append("grant_type", "refresh_token")
     params.append("refresh_token", token.refreshToken)
@@ -51,6 +52,7 @@ export const authOptions = {
     },
     callbacks: {
         async jwt({ token, account }) {
+            // console.log("jwt")
             // Persist the OAuth access_token to the token right after signin
             if (account) {
                 token.accessToken = account.access_token
@@ -58,7 +60,7 @@ export const authOptions = {
                 token.accessTokenExpires = account.expires_at
                 return token
             }
-            // access token has not expired
+            // // access token has not expired
             if (token.accessTokenExpires && Date.now() < token.accessTokenExpires * 1000) {
                 return token
             }

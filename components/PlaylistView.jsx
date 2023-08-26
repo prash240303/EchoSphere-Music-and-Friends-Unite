@@ -98,8 +98,7 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
             <span className='text-normal block text-lg mb-2 text-neutral-300'> {processDesc}</span>
             <span className='text-sm font-semibold px-2 hover:underline'>{playlistData?.owner.display_name} •</span>
             <span className='text-sm font-semibold'>{playlistData?.followers.total} {playlistData?.followers.total > 1 ? "Likes" : "Like"} • </span>
-            <span className='text-sm font-semibold'>{playlistData?.tracks.total} songs, </span>
-            <span className='text-sm font-semibold'></span>
+            <span className='text-sm font-semibold'>{playlistData?.tracks.total} songs </span>
           </div>
         </section>
         <div className='flex gap-8  text-white  border-b border-gray-700 mx-10 mb-2 pb-5 '>

@@ -45,11 +45,6 @@ const Player = ({ globalCurrentSongId, setGlobalCurrentSongId, globalIsTrackPlay
                 if (response.status == 204) {
                     setGlobalIsTrackPlaying(false)
                 }
-                // if(response.status==403)
-                // {
-                //     console.log("hello")
-                //     console.log("error" , data.error.message)
-                // }
             } else {
                 const response = await fetch("https://api.spotify.com/v1/me/player/play", {
                     method: "PUT",
@@ -98,7 +93,7 @@ const Player = ({ globalCurrentSongId, setGlobalCurrentSongId, globalIsTrackPlay
             <div className='flex items-center justify-center'>
                 {globalIsTrackPlaying ? <PauseCircleIcon onClick={handlePlayPause} className='h-10 w-10' /> : <PlayCircleIcon onClick={handlePlayPause} className='h-10 w-10' />}
             </div>
-            
+            <div></div>
         </div>
     );
 }
