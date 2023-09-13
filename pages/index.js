@@ -61,12 +61,12 @@ export default function Home() {
             setGlobalCurrentSongId={setGlobalCurrentSongId}
             setGlobalIsTrackPlaying={setGlobalIsTrackPlaying}
           />}
-          {view === "userProfile" && <UserProfile
+          {/* {view === "userProfile" && <UserProfile
             setView={setView}
             globalArtistId={globalArtistId}
             setGlobalArtistId={setGlobalArtistId}
             setGlobalCurrentSongId={setGlobalCurrentSongId}
-          />}
+          />} */}
         </div>
 
         <div className="sticky z-20 bottom-0 w-full">
