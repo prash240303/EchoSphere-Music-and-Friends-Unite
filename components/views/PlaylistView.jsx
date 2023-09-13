@@ -5,7 +5,7 @@ import { shuffle } from 'lodash';
 import he from 'he';
 import { LuClock3 } from "react-icons/lu"
 
-import Song from './Songs';
+import Song from '../Songs';
 const colors = [
   'from-indigo-500',
   'from-blue-500',
@@ -16,8 +16,6 @@ const colors = [
   'from-purple-500'
 ]
 
-
-
 export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId, setGlobalIsTrackPlaying, setView, setGlobalArtistId }) {
   const { data: session } = useSession()
   const [hover, setHover] = useState(false)
@@ -25,7 +23,6 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
   const [color, setColor] = useState(null)
   const [opacity, setOpacity] = useState(0)
   const [textOpacity, setTextOpacity] = useState(0)
-
 
   function changeOpacity(scrollPos) {
     // scrollPos = 0 -> opacity = 0 
@@ -58,8 +55,6 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
         setPlaylistData(data)
       }
     }
-
-
     f()
   }, [session, globalPlaylistId])
 
@@ -82,12 +77,10 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
         </div>
       </header>
 
-
       <div className='absolute z-20 top-3 right-8 flex items-center justify-center bg-black bg-opacity-70 text-white px-2 pr-3 py-2 gap-2 opacity-90 hover:opacity-80 cursor-pointer rounded-full '>
         <img className='rounded-full w-7   h-7' src={session?.user.image} alt="profile pic" />
         <p className='text-sm font-semibold leading-normal'>Logout</p>
       </div>
-
 
       <div onScroll={(e) => changeOpacity(e.target.scrollTop)} className='relative -top-20 h-screen overflow-y-scroll bg-neutral-900'>
         <section className={`flex items-end space-x-7 bg-gradient-to-b to-neutral-900 ${color} h-80 text-white px-8 pb-8`}>
@@ -123,6 +116,5 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
         </div>
       </div>
     </div>
-
   )
 }

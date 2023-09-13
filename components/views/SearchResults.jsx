@@ -43,7 +43,7 @@ const SearchResults = ({ playlists, songs, artists, setView, setGlobalPlaylistId
     }
 
     return (
-        <div className='flex flex-col gap-8 px-8 h-screen overflow-y-scroll'>
+        <div className='flex flex-col gap-8 px-8 h-screen overflow-y-scroll text-white'>
             <div className='grid grid-cols-2'>
                 <div className='space-y-4'>
                     <h2 className='text-xl font-bold'>Top result</h2>

@@ -1,13 +1,13 @@
 import Artist from "@/components/Artist"
-import HomeView from "@/components/HomeView"
+import HomeView from "@/components/views/HomeView"
 import Library from "@/components/Library"
+import LikedSongs from "@/components/users/LikedSongs"
 import Player from "@/components/Player"
-import PlaylistView from "@/components/PlaylistView"
-import Search from "@/components/Search"
+import PlaylistView from "@/components/views/PlaylistView"
+import Search from "@/components/views/Search"
 import Sidebar from "@/components/Sidebar"
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
-
 export default function Home() {
   const [view, setView] = useState("home") // ["search", "library", "playlist", "artist"]
   const [globalPlaylistId, setGlobalPlaylistId] = useState(null)
@@ -27,9 +27,7 @@ export default function Home() {
           {view === "home" && <HomeView
             setView={setView}
             setGlobalPlaylistId={setGlobalPlaylistId}
-            setGlobalCurrentSongId={setGlobalCurrentSongId}
-            setGlobalIsTrackPlaying={setGlobalIsTrackPlaying}
-            setGlobalArtistId={setGlobalArtistId} />
+          />
           }
           {view === "playlist" && <PlaylistView
             setView={setView}
@@ -56,14 +54,28 @@ export default function Home() {
             setGlobalCurrentSongId={setGlobalCurrentSongId}
             setGlobalIsTrackPlaying={setGlobalIsTrackPlaying}
           />}
+          {view === "likedSongs" && <LikedSongs
+            setView={setView}
+            globalArtistId={globalArtistId}
+            setGlobalArtistId={setGlobalArtistId}
+            setGlobalCurrentSongId={setGlobalCurrentSongId}
+            setGlobalIsTrackPlaying={setGlobalIsTrackPlaying}
+          />}
+          {view === "userProfile" && <UserProfile
+            setView={setView}
+            globalArtistId={globalArtistId}
+            setGlobalArtistId={setGlobalArtistId}
+            setGlobalCurrentSongId={setGlobalCurrentSongId}
+          />}
         </div>
+
         <div className="sticky z-20 bottom-0 w-full">
-          <Player
+          {/* <Player
             globalCurrentSongId={globalCurrentSongId}
             setGlobalCurrentSongId={setGlobalCurrentSongId}
             setGlobalIsTrackPlaying={setGlobalIsTrackPlaying}
             globalIsTrackPlaying={globalIsTrackPlaying}
-          />
+          /> */}
         </div>
       </main>
 
