@@ -8,12 +8,14 @@ import Search from "@/components/views/Search"
 import Sidebar from "@/components/Sidebar"
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
+import UserProfileView from "@/components/views/UserProfileView"
 export default function Home() {
   const [view, setView] = useState("home") // ["search", "library", "playlist", "artist"]
   const [globalPlaylistId, setGlobalPlaylistId] = useState(null)
   const [globalArtistId, setGlobalArtistId] = useState(null)
   const [globalCurrentSongId, setGlobalCurrentSongId] = useState(null)
   const [globalIsTrackPlaying, setGlobalIsTrackPlaying] = useState(false)
+  const [userID , setUserID]= useState(null)
 
   return (
     <>
@@ -61,12 +63,13 @@ export default function Home() {
             setGlobalCurrentSongId={setGlobalCurrentSongId}
             setGlobalIsTrackPlaying={setGlobalIsTrackPlaying}
           />}
-          {/* {view === "userProfile" && <UserProfile
+          {view === "userProfile" && <UserProfileView
             setView={setView}
             globalArtistId={globalArtistId}
             setGlobalArtistId={setGlobalArtistId}
             setGlobalCurrentSongId={setGlobalCurrentSongId}
-          />} */}
+            setUserID={userID}
+          />}
         </div>
 
         <div className="sticky z-20 bottom-0 w-full">

@@ -120,6 +120,9 @@ const Artist = ({
     return data.tracks;
   }
 
+
+
+  // fetch related artist
   async function getRelatedArtists() {
     const response = await fetch(
       `https://api.spotify.com/v1/artists/${globalArtistId}/related-artists`,
@@ -133,6 +136,8 @@ const Artist = ({
     return data.artists;
   }
 
+
+  // fetch artist ablums
   async function getArtistAlbum() {
     const response = await fetch(
       `https://api.spotify.com/v1/artists/${globalArtistId}/albums`,
@@ -249,6 +254,7 @@ const Artist = ({
           </div>
         </div>
         <div className="my-10">
+          {/* realted artist : artist card */}
           <h2 className="text-2xl font-bold mb-8 px-8">Related artists</h2>
           <div className="px-8 w-screen scrollbar-hide  firefox-scrollbar overflow-x-scroll">
             <div className="flex gap-4">
