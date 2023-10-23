@@ -25,7 +25,6 @@
 //         const data = await response.json()
 //         setSearchData(data)
 //     }
-
 //     // useEffect(() => {
 //     //     inputRef.current.focus()
 //     // }, [inputRef])
@@ -59,8 +58,6 @@
 //                     <a href="#">Option 5</a>
 //                 </div>
 //             </div> */}
-
-
 //             <div className='mt-20'>
 //                 <RecentlyPlayedList setView={setView} setGlobalPlaylistId={setGlobalPlaylistId} />
 
@@ -71,14 +68,10 @@
 //                     setGlobalPlaylistId={setGlobalPlaylistId}
 //                 />
 //             </div>
-
-
 //         </div>
 //     );
 // }
-
 // export default HomeView;
-
 
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { signOut, useSession } from 'next-auth/react';
@@ -90,67 +83,68 @@ import '../../styles/profilebutton.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 const HomeView = ({ setView, setGlobalPlaylistId, setGlobalCurrentSongId, setGlobalIsTrackPlaying, setGlobalArtistId }) => {
-    const [isDropdownActive, setIsDropdownActive] = useState(false);
-    const { data: session } = useSession()
-    const [isMenuOpen, setMenuOpen] = useState(false);
-    const toggleDropdown = () => {
-        setMenuOpen(!isMenuOpen);
-        console.log(isMenuOpen);
-    };
+  const [isDropdownActive, setIsDropdownActive] = useState(false);
+  const { data: session } = useSession()
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const toggleDropdown = () => {
+    setMenuOpen(!isMenuOpen);
+    console.log(isMenuOpen);
+  };
 
-    return (
-        <div className='flex-grow h-screen overflow-y-auto'>
-            <div className={`absolute z-20 top-6 right-12 dropdownContainer `}>
-                <div className="dropdown-button hover:scale-110  border-4 rounded-full border-gray-600 dropdownButton text-white" >
-                    <img className='rounded-full  w-8 h-8 cursor-pointer  ' src={session?.user.image} alt="profile pic" onClick={toggleDropdown} />
-                </div>
-            </div>
+  return (
+    <div className='flex-grow h-screen overflow-y-auto'>
+      <div className={`absolute z-20 top-6 right-12 dropdownContainer `}>
+        <div className="dropdown-button hover:scale-110  border-4 rounded-full border-gray-600 dropdownButton text-white" >
+          <img className='rounded-full  w-8 h-8 cursor-pointer  ' src={session?.user.image} alt="profile pic" onClick={toggleDropdown} />
+        </div>
+      </div>
 
-            {!isMenuOpen && (
-          <div className=" text-white  z-20  absolute top-[74px] right-12  bg-spotify-gray rounded-lg shadow-xl">
-            <nav className="flex flex-col p-1 text-base ">
-              <Link
-                href=""
-                className='pl-4  py-3 rounded-lg hover:bg-gray-600'
-                >
-                Profile
-              </Link>
-              <Link
-                href=""
-                className='pl-4  py-3 rounded-lg hover:bg-gray-600'
-                >
-                Settings
-              </Link>
-              <Link
-                href=""
-                className='pl-4 py-3 pr-4 rounded-lg hover:bg-gray-600'
+      {!isMenuOpen && (
+        <div className=" text-white  z-20  absolute top-[74px] right-12  bg-spotify-gray rounded-lg shadow-xl">
+          <nav className="flex flex-col p-1 text-base ">
+            <Link
+              href=""
+              onClick={() => setView("userProfile")} // Use a function reference
+              className='pl-4  py-3 rounded-lg hover:bg-gray-600'
+            >
+              Profile
+            </Link>
 
-                >
-               Upgrade to Premium
-              </Link>
-              <hr className='border-gray-600' />
-              <Link
-                href=""
-                className='pl-4 py-3  pr-4 rounded-lg hover:bg-gray-600'
-                >
-                 Community 
-              </Link>
-           
-            </nav>
-          </div>
-        )} 
+            <Link
+              href=""
+              className='pl-4  py-3 rounded-lg hover:bg-gray-600'
+            >
+              Settings
+            </Link>
+            <Link
+              href=""
+              className='pl-4 py-3 pr-4 rounded-lg hover:bg-gray-600'
 
-            <div className='mt-24'>
-                <RecentlyPlayedList setView={setView} setGlobalPlaylistId={setGlobalPlaylistId} />
-            </div>
-            <div className='mt-10 '>
-                <FeaturedPlaylists
-                    setView={setView}
-                    setGlobalPlaylistId={setGlobalPlaylistId}
-                />
-            </div>
-        </div >
-    );
+            >
+              Upgrade to Premium
+            </Link>
+            <hr className='border-gray-600' />
+            <Link
+              href=""
+              className='pl-4 py-3  pr-4 rounded-lg hover:bg-gray-600'
+            >
+              Community
+            </Link>
+
+          </nav>
+        </div>
+      )}
+      <div className='mt-24'>
+        <RecentlyPlayedList setView={setView} setGlobalPlaylistId={setGlobalPlaylistId} />
+      </div>
+      <div className='mt-10 '>
+        <FeaturedPlaylists
+          setView={setView}
+          setGlobalPlaylistId={setGlobalPlaylistId}
+        />
+      </div>
+    </div >
+  );
 }
 
 export default HomeView;
