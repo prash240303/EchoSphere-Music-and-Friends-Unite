@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { PlayIcon } from "@heroicons/react/24/solid";
 import { signOut, useSession } from 'next-auth/react';
+import Image from "next/image";
 
 
 function RecentlyPlayedList({ setView, setGlobalPlaylistId }) {
@@ -43,7 +44,8 @@ function RecentlyPlayedList({ setView, setGlobalPlaylistId }) {
             <div className="absolute opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-200 shadow-2xl shadow-neutral-900 z-10 h-12 w-12 flex items-center justify-center rounded-full bg-green-500 top-[10px] group-hover:top-[15px] right-3">
               <PlayIcon className="h-6 w-6 text-black" />
             </div>
-            <img
+            <Image
+              width={500}
               className="w-20 h-fill rounded-s-lg"
               src={playlist.images[0].url}
               alt={playlist.name}

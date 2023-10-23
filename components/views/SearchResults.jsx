@@ -1,5 +1,6 @@
 import { PlayIcon } from '@heroicons/react/24/solid';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import React from 'react';
 
 const SearchResults = ({ playlists, songs, artists, setView, setGlobalPlaylistId, setGlobalCurrentSongId, setGlobalIsTrackPlaying, setGlobalArtistId }) => {
@@ -53,7 +54,7 @@ const SearchResults = ({ playlists, songs, artists, setView, setGlobalPlaylistId
                                 <PlayIcon className='h-6 w-6 text-black' />
                             </div>
                             {playlists && <>
-                                <img className='h-28 w-28 rounded' src={playlists[0].images[0].url} />
+                                <Image width={500} alt='playlist-cover' className='h-28 w-28 rounded' src={playlists[0].images[0].url} />
                                 <p className='text-3xl font-bold'>{playlists[0].name}</p>
                                 <p className='text-sm text-neutral-400'>By {playlists[0].owner.display_name} <span className='rounded-full bg-neutral-900 text-white font-bold ml-4 py-1 px-4'>Playlist</span></p>
                             </>}
@@ -65,7 +66,7 @@ const SearchResults = ({ playlists, songs, artists, setView, setGlobalPlaylistId
                     <div className='flex flex-col'>
                         {songs.slice(0, 4).map((song) => {
                             return <div onClick={() => playSong(song)} key={song.id} className='cursor-default w-full h-16 px-4 rounded-md flex items-center gap-4 hover:bg-neutral-700'>
-                                <img className='h-10 w-10' src={song.album.images[0].url} />
+                                <Image width={500} alt='album-art' className='h-10 w-10' src={song.album.images[0].url} />
                                 <div>
                                     <p>{song.name}</p>
                                     <p className='text-sm text-neutral-400'>{song.artists[0].name}</p>
@@ -88,7 +89,7 @@ const SearchResults = ({ playlists, songs, artists, setView, setGlobalPlaylistId
                             <div className='absolute opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-200 shadow-2xl shadow-neutral-900 z-10 h-12 w-12 flex items-center justify-center rounded-full bg-green-500 top-[156px] group-hover:top-[148px] right-6'>
                                 <PlayIcon className='h-6 w-6 text-black' />
                             </div>
-                            <img className='w-48 h-48 mb-4 rounded-full' src={artist.images[0].url} />
+                            <Image width={500} alt='artist-pic' className='w-48 h-48 mb-4 rounded-full' src={artist.images[0].url} />
                             <p className='text-base text-white mb-1 w-48 truncate'>{artist.name}</p>
                             <p className='text-sm text-neutral-400 mb-8 w-48 truncate'>Artist</p>
                         </div>
@@ -103,7 +104,7 @@ const SearchResults = ({ playlists, songs, artists, setView, setGlobalPlaylistId
                             <div className='absolute opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-200 shadow-2xl shadow-neutral-900 z-10 h-12 w-12 flex items-center justify-center rounded-full bg-green-500 top-[156px] group-hover:top-[148px] right-6'>
                                 <PlayIcon className='h-6 w-6 text-black' />
                             </div>
-                            <img className='w-48 h-48 mb-4' src={playlist.images[0].url} />
+                            <Image width={500} height={500} alt='playlist-cover' className='w-48 h-48 mb-4' src={playlist.images[0].url} />
                             <p className='text-base text-white mb-1 w-48 truncate'>{playlist.name}</p>
                             <p className='text-sm text-neutral-400 mb-8 w-48 truncate'>By {playlist.owner.display_name}</p>
                         </div>

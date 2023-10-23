@@ -6,6 +6,7 @@ import he from 'he';
 import { LuClock3 } from "react-icons/lu"
 
 import Song from '../Songs';
+import Image from 'next/image';
 const colors = [
   'from-indigo-500',
   'from-blue-500',
@@ -72,19 +73,19 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
     <div className='flex-grow h-screen'>
       <header style={{ opacity: opacity }} className='text-white sticky top-0 h-16 z-10 text-3xl bg-neutral-800 p-8 flex items-center font-bold'>
         <div style={{ opacity: textOpacity }} className='flex items-center'>
-          {playlistData && <img className='h-8 w-8 mr-6' src={playlistData.images[0].url} />}
+          {playlistData && <Image className='h-8 w-8 mr-6' src={playlistData.images[0].url} width={100} height={100} alt='playlistimage' />}
           <p>{playlistData?.name}</p>
         </div>
       </header>
 
       <div className='absolute z-20 top-3 right-8 flex items-center justify-center bg-black bg-opacity-70 text-white px-2 pr-3 py-2 gap-2 opacity-90 hover:opacity-80 cursor-pointer rounded-full '>
-        <img className='rounded-full w-7   h-7' src={session?.user.image} alt="profile pic" />
+        <Image className='rounded-full w-7   h-7' src={session?.user.image} alt="profile pic" />
         <p className='text-sm font-semibold leading-normal'>Logout</p>
       </div>
 
       <div onScroll={(e) => changeOpacity(e.target.scrollTop)} className='relative -top-20 h-screen overflow-y-scroll bg-neutral-900'>
         <section className={`flex items-end space-x-7 bg-gradient-to-b to-neutral-900 ${color} h-80 text-white px-8 pb-8`}>
-          {playlistData && <img className='h-44 w-44' src={playlistData.images[0].url} />}
+          {playlistData && <Image width={500} height={500} alt='playlist-image' className='h-44 w-44' src={playlistData.images[0].url} />}
           <div>
             <p className='text-sm font-bold'>Playlist</p>
             <h1 className='text-2xl md:text-3xl lg:text-5xl font-extrabold mb-5'>{playlistData?.name}</h1>

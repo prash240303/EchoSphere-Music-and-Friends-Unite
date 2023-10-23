@@ -1,5 +1,6 @@
 import { PlayIcon } from '@heroicons/react/24/solid';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 const Song = ({ sno, track, setGlobalCurrentSongId, setGlobalIsTrackPlaying, setView, setGlobalArtistId }) => {
@@ -42,7 +43,7 @@ const Song = ({ sno, track, setGlobalCurrentSongId, setGlobalIsTrackPlaying, set
         <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}  onDoubleClick={async () => await playSong(track)} className="grid grid-cols-2 text-neutral-400 text-sm py-4 px-5 hover:bg-white hover:bg-opacity-10 rounded-lg cursor-default " >
             <div className='flex items-center space-x-4'>
                 {hover ? <PlayIcon className='h-5 w-5 text-white cursor-pointer' onClick={async () => await playSong(track)} /> : <p className='w-5'>{sno + 1}</p>}
-                {track?.album?.images[0]?.url && <img className='h-10 w-10' src={track.album.images[0].url} />}
+                {track?.album?.images[0]?.url && <Image width={500} height={500} alt='song-art' className='h-10 w-10' src={track.album.images[0].url} />}
                 <div>
                     <p className='w-36 lg:w-64 truncate text-white text-base'>{track.name}</p>
                     <p className='w-50 cursor-pointer'>

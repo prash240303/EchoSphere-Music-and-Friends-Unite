@@ -5,6 +5,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { shuffle } from "lodash";
 import { PlayIcon } from "@heroicons/react/24/solid";
 import { LuVerified } from "react-icons/lu";
+import Image from "next/image";
 const colors = [
   "from-indigo-500",
   "from-blue-500",
@@ -73,7 +74,7 @@ const Artist = ({
       console.error('User not logged in or session not available.');
     }
   }
-  
+
 
   function changeOpacity(scrollPos) {
     // scrollPos = 0 -> opacity = 0
@@ -109,7 +110,7 @@ const Artist = ({
   async function getTopTracks() {
     const response = await fetch(
       `https://api.spotify.com/v1/artists/${globalArtistId}/top-tracks?` +
-        new URLSearchParams({ market: "US" }),
+      new URLSearchParams({ market: "US" }),
       {
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
@@ -180,7 +181,7 @@ const Artist = ({
       >
         <div style={{ opacity: textOpacity }} className="flex items-center">
           {artistData && (
-            <img className="h-8 w-8 mr-6" src={artistData.images[0].url} />
+            <Image width={500} alt="artist-image" className="h-8 w-8 mr-6" src={artistData.images[0].url} />
           )}
           <p>{artistData?.name}</p>
         </div>
@@ -189,7 +190,8 @@ const Artist = ({
         onClick={() => signOut()}
         className="absolute z-20 top-5 right-8 flex items-center bg-black bg-opacity-70 text-white space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2"
       >
-        <img
+        <Image
+          width={500}
           className="rounded-full w-7 h-7"
           src={session?.user.image}
           alt="profile pic"
@@ -206,7 +208,9 @@ const Artist = ({
         >
           <div className="flex items-center justify-center overflow-y-hidden w-full h-80">
             {artistData && (
-              <img
+              <Image
+                width={500}
+                alt="artist-image"
                 className="w-full  aspect-auto "
                 src={artistData.images[0].url}
               />
@@ -272,7 +276,9 @@ const Artist = ({
                   <div className="absolute opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-200 shadow-2xl shadow-neutral-900 z-10 h-12 w-12 flex items-center justify-center rounded-full bg-green-500 top-[156px] group-hover:top-[148px] right-6">
                     <PlayIcon className="h-6 w-6 text-black" />
                   </div>
-                  <img
+                  <Image
+                    width={500}
+                    alt="artist-image"
                     className="w-48 h-48 mb-4 rounded-full"
                     src={artist.images[0].url}
                   />
@@ -300,7 +306,7 @@ const Artist = ({
                   <div className="absolute opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-200 shadow-2xl shadow-neutral-900 z-10 h-12 w-12 flex items-center justify-center rounded-full bg-green-500 top-[156px] group-hover:top-[148px] right-6">
                     <PlayIcon className="h-6 w-6 text-black" />
                   </div>
-                  <img className="w-48 h-48 mb-4 " src={albums.images[0].url} />
+                  <Image width={500} alt="album-art" className="w-48 h-48 mb-4 " src={albums.images[0].url} />
                   <p className="text-base text-white mb-1 w-48 truncate">
                     {albums.name}
                   </p>

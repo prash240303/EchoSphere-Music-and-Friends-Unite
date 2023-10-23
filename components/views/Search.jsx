@@ -3,6 +3,7 @@ import { signOut, useSession } from 'next-auth/react';
 import React, { useEffect, useRef, useState } from 'react';
 import FeaturedPlaylists from '../FeaturedPlaylists';
 import SearchResults from './SearchResults';
+import Image from 'next/image';
 
 const Search = ({ setView, setGlobalPlaylistId, setGlobalCurrentSongId, setGlobalIsTrackPlaying, setGlobalArtistId }) => {
     const { data: session } = useSession()
@@ -37,7 +38,7 @@ const Search = ({ setView, setGlobalPlaylistId, setGlobalCurrentSongId, setGloba
                 }} ref={inputRef} className='rounded-full hover:ring-1  hover:ring-gray-400 bg-spotify-gray w-96 pl-10   text-white text-base pt-3 pb-4 flex  font-normal outline-0' placeholder='search songs , playlists , users or artists' />
             </header>
             <div onClick={() => signOut()} className='absolute z-20 top-5 right-8 flex items-center bg-black bg-opacity-70 text-white space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2'>
-                <img className='rounded-full w-7 h-7' src={session?.user.image} alt="profile pic" />
+                <Image width={100} className='rounded-full w-7 h-7' src={session?.user.image} alt="profile pic" />
                 <p className='text-sm'>Logout</p>
                 <ChevronDownIcon className='h-5 w-5' />
             </div>

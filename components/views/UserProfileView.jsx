@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import { shuffle } from 'lodash';
+import Image from 'next/image';
 
 const colors = [
   'from-blue-500',
@@ -73,7 +74,7 @@ export default function UserProfileView({ userID, globalPlaylistId, setGlobalCur
       </header>
 
       <div className='absolute z-20 top-3 right-8 flex items-center justify-center bg-black bg-opacity-70 text-white px-2 pr-3 py-2 gap-2 opacity-90 hover:opacity-80 cursor-pointer rounded-full '>
-        <img className='rounded-full w-7   h-7' src={session?.user.image} alt="profile pic" />
+        <Image width={100} className='rounded-full w-7   h-7' src={session?.user.image} alt="profile pic" />
         <p className='text-sm font-semibold leading-normal'>Logout</p>
       </div>
 
