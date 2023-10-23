@@ -123,6 +123,9 @@ const Artist = ({
 
 
   // fetch related artist
+
+
+  // fetch related artist
   async function getRelatedArtists() {
     const response = await fetch(
       `https://api.spotify.com/v1/artists/${globalArtistId}/related-artists`,
@@ -136,6 +139,8 @@ const Artist = ({
     return data.artists;
   }
 
+
+  // fetch artist ablums
 
   // fetch artist ablums
   async function getArtistAlbum() {

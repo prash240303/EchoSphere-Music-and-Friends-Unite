@@ -90,7 +90,21 @@ const HomeView = ({ setView, setGlobalPlaylistId, setGlobalCurrentSongId, setGlo
     setMenuOpen(!isMenuOpen);
     console.log(isMenuOpen);
   };
+  const [isDropdownActive, setIsDropdownActive] = useState(false);
+  const { data: session } = useSession()
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const toggleDropdown = () => {
+    setMenuOpen(!isMenuOpen);
+    console.log(isMenuOpen);
+  };
 
+  return (
+    <div className='flex-grow h-screen overflow-y-auto'>
+      <div className={`absolute z-20 top-6 right-12 dropdownContainer `}>
+        <div className="dropdown-button hover:scale-110  border-4 rounded-full border-gray-600 dropdownButton text-white" >
+          <img className='rounded-full  w-8 h-8 cursor-pointer  ' src={session?.user.image} alt="profile pic" onClick={toggleDropdown} />
+        </div>
+      </div>
   return (
     <div className='flex-grow h-screen overflow-y-auto'>
       <div className={`absolute z-20 top-6 right-12 dropdownContainer `}>
