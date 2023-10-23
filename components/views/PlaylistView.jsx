@@ -79,7 +79,7 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
       </header>
 
       <div className='absolute z-20 top-3 right-8 flex items-center justify-center bg-black bg-opacity-70 text-white px-2 pr-3 py-2 gap-2 opacity-90 hover:opacity-80 cursor-pointer rounded-full '>
-        <Image className='rounded-full w-7   h-7' src={session?.user.image} alt="profile pic" />
+        <Image className='rounded-full w-7   h-7' src={session?.user.image} width={100} height={100} alt="profile pic" />
         <p className='text-sm font-semibold leading-normal'>Logout</p>
       </div>
 

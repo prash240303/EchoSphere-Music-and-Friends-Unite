@@ -46,6 +46,7 @@ function RecentlyPlayedList({ setView, setGlobalPlaylistId }) {
             </div>
             <Image
               width={500}
+              height={500}
               className="w-20 h-fill rounded-s-lg"
               src={playlist.images[0].url}
               alt={playlist.name}

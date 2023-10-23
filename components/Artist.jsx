@@ -181,7 +181,7 @@ const Artist = ({
       >
         <div style={{ opacity: textOpacity }} className="flex items-center">
           {artistData && (
-            <Image width={500} alt="artist-image" className="h-8 w-8 mr-6" src={artistData.images[0].url} />
+            <Image width={500} height={100} alt="artist-image" className="h-8 w-8 mr-6" src={artistData.images[0].url} />
           )}
           <p>{artistData?.name}</p>
         </div>
@@ -192,6 +192,7 @@ const Artist = ({
       >
         <Image
           width={500}
+          height={500}
           className="rounded-full w-7 h-7"
           src={session?.user.image}
           alt="profile pic"
@@ -210,6 +211,7 @@ const Artist = ({
             {artistData && (
               <Image
                 width={500}
+                height={500}
                 alt="artist-image"
                 className="w-full  aspect-auto "
                 src={artistData.images[0].url}
@@ -278,6 +280,7 @@ const Artist = ({
                   </div>
                   <Image
                     width={500}
+                    height={500}
                     alt="artist-image"
                     className="w-48 h-48 mb-4 rounded-full"
                     src={artist.images[0].url}
@@ -306,7 +309,7 @@ const Artist = ({
                   <div className="absolute opacity-0 group-hover:opacity-100 transition-all ease-in-out duration-200 shadow-2xl shadow-neutral-900 z-10 h-12 w-12 flex items-center justify-center rounded-full bg-green-500 top-[156px] group-hover:top-[148px] right-6">
                     <PlayIcon className="h-6 w-6 text-black" />
                   </div>
-                  <Image width={500} alt="album-art" className="w-48 h-48 mb-4 " src={albums.images[0].url} />
+                  <Image width={500} height={100} alt="album-art" className="w-48 h-48 mb-4 " src={albums.images[0].url} />
                   <p className="text-base text-white mb-1 w-48 truncate">
                     {albums.name}
                   </p>
