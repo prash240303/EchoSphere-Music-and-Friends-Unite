@@ -1,6 +1,6 @@
 import Artist from "@/components/Artist"
 import HomeView from "@/components/views/HomeView"
-import Library from "@/components/Library"
+import Library from "@/components/views/LibraryView"
 import LikedSongs from "@/components/users/LikedSongs"
 import Player from "@/components/Player"
 import PlaylistView from "@/components/views/PlaylistView"

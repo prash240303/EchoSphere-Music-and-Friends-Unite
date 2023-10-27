@@ -100,7 +100,7 @@ const HomeView = ({ setView, setGlobalPlaylistId, setGlobalCurrentSongId, setGlo
       </div>
 
       {!isMenuOpen && (
-        <div className=" text-white  z-20  absolute top-[74px] right-12  bg-spotify-gray rounded-lg shadow-xl">
+        <div className=" text-white  z-20  absolute top-[74px] right-12  bg-spotify-gray rounded-lg shadow-2xl">
           <nav className="flex flex-col p-1 text-base ">
             <Link
               href=""
@@ -123,12 +123,12 @@ const HomeView = ({ setView, setGlobalPlaylistId, setGlobalCurrentSongId, setGlo
             >
               Upgrade to Premium
             </Link>
-            <hr className='border-gray-600' />
+            <hr className='border-gray-600 my-1' />
             <Link
               href=""
               className='pl-4 py-3  pr-4 rounded-lg hover:bg-gray-600'
             >
-              Community
+              Log Out
             </Link>
 
           </nav>

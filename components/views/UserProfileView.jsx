@@ -128,10 +128,10 @@ export default function UserProfileView({  globalPlaylistId, setGlobalCurrentSon
           </div>
           <div className='flex flex-col items-start h-full mt-52'>
             <div className='font-semibold mb-2'>Profile</div>
-            {/* <div className=' font-extrabold mb-6 text-7xl'>{userInfo.display_name}</div> */}
-            <div className=' font-extrabold mb-6 text-7xl'>Prash</div>
-            {/* <div className='font-semibold text-sm'>10 Public Playlists &#x22C5; {userInfo.followers.total} Followers &#x22C5; 89 Following </div> */}
-            <div className='font-semibold text-sm'>10 Public Playlists &#x22C5; 40 Followers &#x22C5; 89 Following </div>
+            <div className=' font-extrabold mb-6 text-7xl'>{userInfo?.display_name}</div>
+            {/* <div className=' font-extrabold mb-6 text-7xl'>Prash</div> */}
+            <div className='font-semibold text-sm'>10 Public Playlists &#x22C5; {userInfo?.followers.total} Followers &#x22C5; 89 Following </div>
+            {/* <div className='font-semibold text-sm'>10 Public Playlists &#x22C5; 40 Followers &#x22C5; 89 Following </div> */}
           </div>
 
           <div>
