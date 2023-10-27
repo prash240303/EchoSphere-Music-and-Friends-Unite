@@ -1,6 +1,6 @@
 import { signOut, useSession } from "next-auth/react";
 import React, { useEffect, useState } from "react";
-import Song from "./Songs";
+import Song from "../Songs";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { shuffle } from "lodash";
 import { PlayIcon } from "@heroicons/react/24/solid";

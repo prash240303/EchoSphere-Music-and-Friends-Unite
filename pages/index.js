@@ -1,4 +1,4 @@
-import Artist from "@/components/Artist"
+import Artist from "@/components/views/ArtistView"
 import HomeView from "@/components/views/HomeView"
 import Library from "@/components/views/LibraryView"
 import LikedSongs from "@/components/users/LikedSongs"
