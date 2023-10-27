@@ -8,6 +8,7 @@ import Search from "@/components/views/Search"
 import Sidebar from "@/components/Sidebar"
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
+import OtherUsersProfile from "@/components/users/OtherUsersProfile"
 import UserProfileView from "@/components/views/UserProfileView"
 export default function Home() {
   const [view, setView] = useState("home") // ["search", "library", "playlist", "artist"]
@@ -15,7 +16,7 @@ export default function Home() {
   const [globalArtistId, setGlobalArtistId] = useState(null)
   const [globalCurrentSongId, setGlobalCurrentSongId] = useState(null)
   const [globalIsTrackPlaying, setGlobalIsTrackPlaying] = useState(false)
-  const [userID , setUserID]= useState(null)
+  const [userID, setUserID] = useState(null)
 
   return (
     <>
@@ -36,6 +37,7 @@ export default function Home() {
             setGlobalArtistId={setGlobalArtistId}
             globalPlaylistId={globalPlaylistId}
             setGlobalCurrentSongId={setGlobalCurrentSongId}
+            setUserID={setUserID}
             setGlobalIsTrackPlaying={setGlobalIsTrackPlaying}
           />}
           {view === "search" && <Search
@@ -70,6 +72,14 @@ export default function Home() {
             setGlobalCurrentSongId={setGlobalCurrentSongId}
             setUserID={userID}
           />}
+          {
+            view == "otherUsersProfile" && <OtherUsersProfile
+              setView={setView}
+              globalArtistId={globalArtistId}
+              setGlobalArtistId={setGlobalArtistId}
+              setGlobalCurrentSongId={setGlobalCurrentSongId}
+              userID={userID}
+            />}
         </div>
 
         <div className="sticky z-20 bottom-0 w-full">

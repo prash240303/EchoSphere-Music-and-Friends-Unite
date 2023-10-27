@@ -1,28 +1,29 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
+import React from 'react'
+import { useState, useEffect } from 'react'
 import { useSession } from 'next-auth/react'
+import { PlayIcon } from '@heroicons/react/24/outline'
 import { set, shuffle } from 'lodash';
-import Image from 'next/image';
-import { PlayIcon } from '@heroicons/react/24/outline';
-import Song from '../Songs';
 
 const colors = [
   'from-blue-500',
 ]
 
-export default function UserProfileView({  globalPlaylistId, setGlobalCurrentSongId, setGlobalIsTrackPlaying, setView, setGlobalArtistId }) {
+const OtherUsersProfile = ({ globalPlaylistId, setGlobalCurrentSongId, setGlobalIsTrackPlaying, setView, setGlobalArtistId, userID }) => {
+  const [hover, setHover] = useState(false)
   const { data: session } = useSession()
-
   const [color, setColor] = useState(null)
+
   const [opacity, setOpacity] = useState(0)
-  const [textOpacity, setTextOpacity] = useState(0)
-  const [topArtists, setTopArtists] = useState([]);
-  const [followingArtists, setfollowingArtists] = useState([]);
   const [userImageURL, setUserImageURL] = useState(null)
   const [userInfo, setUserInfo] = useState(null);
-  async function getUserInfo() {
+  const [textOpacity, setTextOpacity] = useState(0)
+
+  console.log("user id", userID)
+  async function getUserProfileData() {
     const response = await fetch(
-      `https://api.spotify.com/v1/me`,
+      `https://api.spotify.com/v1/users/${userID}`,
       {
         headers: {
           Authorization: `Bearer ${session.accessToken}`,
@@ -30,61 +31,51 @@ export default function UserProfileView({  globalPlaylistId, setGlobalCurrentSon
       },
     )
     const data = await response.json()
+    console.log("user data", data)
     return data;
   }
 
   async function getUserImage() {
-    const response = await fetch(
-      `https://api.spotify.com/v1/me`,
-      {
-        headers: {
-          Authorization: `Bearer ${session.accessToken}`,
+    try {
+      const response = await fetch(
+        `https://api.spotify.com/v1/users/${userID}`,
+        {
+          headers: {
+            Authorization: `Bearer ${session.accessToken}`,
+          },
         },
-      },
-    )
-    const data = await response.json()
-    return data.images[1].url;
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch user data: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      // Check if the 'images' property exists and has at least one image
+      if (data.images && data.images.length > 0) {
+        return data.images[1].url;
+      } else {
+        // Handle the case where there are no images
+        console.warn('No images found for the user.');
+        return null; // Or provide a default image URL
+      }
+    } catch (error) {
+      console.error(error);
+      return null; // Handle the error gracefully
+    }
   }
 
-  async function getTopArtist() {
-    const response = await fetch(
-      `https://api.spotify.com/v1/me/top/artists?limit=5&offset=2`,
-      {
-        headers: {
-          Authorization: `Bearer ${session.accessToken}`,
-        },
-      }
-    );
-    const data = await response.json();
-    // console.log("top artists", data.items)
-    return data.items;
-  }
-  async function getFollowingArtist() {
-    const response = await fetch(
-      `https://api.spotify.com/v1/me/following?type=artist&limit=10&offset=2`,
-      {
-        headers: {
-          Authorization: `Bearer ${session.accessToken}`,
-        },
-      }
-    );
-    const data = await response.json();
-    // console.log("follwoing", data.artists.items)
-    return data.artists.items;
-  }
 
   useEffect(() => {
     async function f() {
       if (session && session.accessToken) {
-        setTopArtists(await getTopArtist());
-        setUserImageURL(await getUserImage());
-        setUserInfo(await getUserInfo());
-        setfollowingArtists(await getFollowingArtist())
+        setUserInfo(await getUserProfileData())
+        setUserImageURL(await getUserImage())
       }
     }
     f();
   }, [session]);
-
 
   function changeOpacity(scrollPos) {
     const offset = 300
@@ -100,7 +91,6 @@ export default function UserProfileView({  globalPlaylistId, setGlobalCurrentSon
       setTextOpacity(newTextOpacity)
     }
   }
-  console.log("user info", userInfo)
 
   useEffect(() => {
     setColor(shuffle(colors).pop())
@@ -128,10 +118,10 @@ export default function UserProfileView({  globalPlaylistId, setGlobalCurrentSon
           </div>
           <div className='flex flex-col items-start h-full mt-52'>
             <div className='font-semibold mb-2'>Profile</div>
-            {/* <div className=' font-extrabold mb-6 text-7xl'>{userInfo.display_name}</div> */}
-            <div className=' font-extrabold mb-6 text-7xl'>Prash</div>
-            {/* <div className='font-semibold text-sm'>10 Public Playlists &#x22C5; {userInfo.followers.total} Followers &#x22C5; 89 Following </div> */}
-            <div className='font-semibold text-sm'>10 Public Playlists &#x22C5; 40 Followers &#x22C5; 89 Following </div>
+            <div className=' font-extrabold mb-6 text-7xl'>{userInfo?.display_name}</div>
+            {/* <div className=' font-extrabold mb-6 text-7xl'>{Rhea}</div> */}
+            <div className='font-semibold text-sm'>10 Public Playlists &#x22C5; {userInfo?.followers.total} Followers &#x22C5; 89 Following </div>
+            {/* <div className='font-semibold text-sm'>10 Public Playlists &#x22C5; 40 Followers &#x22C5; 89 Following </div> */}
           </div>
 
           <div>
@@ -142,7 +132,7 @@ export default function UserProfileView({  globalPlaylistId, setGlobalCurrentSon
 
         </div>
         <h2 className="text-2xl font-bold mb-8 text-white px-8"> Top artist this month</h2>
-        <div className="px-8 w-screen scrollbar-hide  firefox-scrollbar overflow-x-scroll">
+        {/* <div className="px-8 w-screen scrollbar-hide  firefox-scrollbar overflow-x-scroll">
           <div className="flex gap-4">
             {topArtists && topArtists.map((artist) => (
               <div
@@ -169,9 +159,9 @@ export default function UserProfileView({  globalPlaylistId, setGlobalCurrentSon
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
         <h2 className="text-2xl font-bold mb-8 text-white px-8">Following</h2>
-        <div className="px-8 w-screen scrollbar-hide  firefox-scrollbar overflow-x-scroll">
+        {/* <div className="px-8 w-screen scrollbar-hide  firefox-scrollbar overflow-x-scroll">
           <div className="flex gap-4">
             {followingArtists && followingArtists.map((artist) => (
               <div
@@ -198,8 +188,10 @@ export default function UserProfileView({  globalPlaylistId, setGlobalCurrentSon
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
 }
+
+export default OtherUsersProfile

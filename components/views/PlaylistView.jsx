@@ -7,6 +7,7 @@ import { LuClock3 } from "react-icons/lu"
 
 import Song from '../Songs';
 import Image from 'next/image';
+import Link from 'next/link';
 const colors = [
   'from-indigo-500',
   'from-blue-500',
@@ -17,7 +18,7 @@ const colors = [
   'from-purple-500'
 ]
 
-export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId, setGlobalIsTrackPlaying, setView, setGlobalArtistId }) {
+export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId, setGlobalIsTrackPlaying, setView, setGlobalArtistId, setUserID }) {
   const { data: session } = useSession()
   const [hover, setHover] = useState(false)
   const [playlistData, setPlaylistData] = useState(null)
@@ -63,12 +64,13 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
     setColor(shuffle(colors).pop())
   }, [globalPlaylistId])
 
+  console.log("playlistData", playlistData?.owner.id)
 
 
   const processDesc = he.decode(playlistData?.description || " ")
 
 
-
+  const userID = playlistData?.owner.id;
   return (
     <div className='flex-grow h-screen'>
       <header style={{ opacity: opacity }} className='text-white sticky top-0 h-16 z-10 text-3xl bg-neutral-800 p-8 flex items-center font-bold'>
@@ -90,7 +92,7 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
             <p className='text-sm font-bold'>Playlist</p>
             <h1 className='text-2xl md:text-3xl lg:text-5xl font-extrabold mb-5'>{playlistData?.name}</h1>
             <span className='text-normal block text-lg mb-2 text-neutral-300'> {processDesc}</span>
-            <span className='text-sm font-semibold px-2 hover:underline'>{playlistData?.owner.display_name} •</span>
+            <span onClick={() => { setView("otherUsersProfile"); setUserID(userID) }} className='text-sm font-semibold px-2 hover:underline'>{playlistData?.owner.display_name}•</span>
             <span className='text-sm font-semibold'>{playlistData?.followers.total} {playlistData?.followers.total > 1 ? "Likes" : "Like"} • </span>
             <span className='text-sm font-semibold'>{playlistData?.tracks.total} songs </span>
           </div>

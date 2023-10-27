@@ -46,7 +46,7 @@ const Song = ({ sno, track, setGlobalCurrentSongId, setGlobalIsTrackPlaying, set
                 {track?.album?.images[0]?.url && <Image width={500} height={500} alt='song-art' className='h-10 w-10' src={track.album.images[0].url} />}
                 <div>
                     <p className='w-36 lg:w-64 truncate text-white text-base'>{track.name}</p>
-                    <p className='w-50 cursor-pointer'>
+                    <div className='w-50 cursor-pointer'>
                         {
                             track.artists.map((artist, i) => {
                                 return (
@@ -57,7 +57,7 @@ const Song = ({ sno, track, setGlobalCurrentSongId, setGlobalIsTrackPlaying, set
                                 )
                             })
                         }
-                    </p>
+                    </div>
                 </div>
             </div>
             <div className='flex items-center justify-between ml-auto md:ml-0'>
