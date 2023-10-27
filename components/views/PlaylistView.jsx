@@ -91,7 +91,7 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
           <div>
             <p className='text-sm font-bold'>Playlist</p>
             <h1 className='text-2xl md:text-3xl lg:text-5xl font-extrabold mb-5'>{playlistData?.name}</h1>
-            <span className='text-normal block text-lg mb-2 text-neutral-300'> {processDesc}</span>
+            <span className=' block text-sm mb-2 text-neutral-300'> {processDesc}</span>
             <span onClick={() => { setView("otherUsersProfile"); setUserID(userID) }} className='text-sm font-semibold px-2 hover:underline'>{playlistData?.owner.display_name}•</span>
             <span className='text-sm font-semibold'>{playlistData?.followers.total} {playlistData?.followers.total > 1 ? "Likes" : "Like"} • </span>
             <span className='text-sm font-semibold'>{playlistData?.tracks.total} songs </span>
@@ -105,7 +105,6 @@ export default function Playlistveiw({ globalPlaylistId, setGlobalCurrentSongId,
         </div>
         <div className='text-white px-8 flex flex-col space-y-1  pb-28'>
           {playlistData?.tracks.items.map((track, i) => {
-            // song component
             return <Song
               setView={setView}
               setGlobalArtistId={setGlobalArtistId}
