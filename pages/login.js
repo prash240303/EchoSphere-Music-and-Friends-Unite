@@ -7,12 +7,9 @@ const SpotifySVG = () => (
 const Login = () => {
     return (
         <div className='w-full h-screen flex items-center justify-center bg-zinc-900'>
-           
             <div className="flex flex-col gap-12 justify-center items-center">
-
             <SpotifySVG />
                 <button className="text-white px-6 py-2.5 rounded-full bg-green-500 font-semibold hover:bg-green-600  text-xl" onClick={() => signIn('spotify', { callbackUrl: "/" })}>Login with spotify</button>
-
             </div>
 
         </div>
