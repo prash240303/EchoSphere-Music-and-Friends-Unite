@@ -83,12 +83,12 @@ export default function Home() {
         </div>
 
         <div className="sticky z-20 bottom-0 w-full">
-          {/* <Player
+          <Player
             globalCurrentSongId={globalCurrentSongId}
             setGlobalCurrentSongId={setGlobalCurrentSongId}
             setGlobalIsTrackPlaying={setGlobalIsTrackPlaying}
             globalIsTrackPlaying={globalIsTrackPlaying}
-          /> */}
+          />
         </div>
       </main>
 

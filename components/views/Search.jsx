@@ -30,12 +30,12 @@ const Search = ({ setView, setGlobalPlaylistId, setGlobalCurrentSongId, setGloba
 
     return (
         <div className='flex-grow h-screen'>
-            <header className='text-white sticky top-0  h-20 z-10 text-5xl flex items-center px-8'>
-                <MagnifyingGlassIcon className='absolute top-7 left-10 h-6 w-6 text-neutral-500' />
+            <header className='text-white sticky top-0 mb-8  h-20 z-10 text-5xl flex items-center px-8'>
+                <MagnifyingGlassIcon className='absolute top-7 left-11 h-6 w-6 text-neutral-500' />
                 <input value={inputValue} onChange={async (e) => {
                     setInputValue(e.target.value)
                     await updateSearchResults(e.target.value)
-                }} ref={inputRef} className='rounded-full hover:ring-1  hover:ring-gray-400 bg-spotify-gray w-96 pl-10   text-white text-base pt-3 pb-4 flex  font-normal outline-0' placeholder='search songs , playlists , users or artists' />
+                }} ref={inputRef} className='rounded-full hover:ring-1  hover:ring-gray-400 bg-spotify-gray w-96 pl-12   text-white text-base py-3  flex  font-normal outline-0' placeholder='search songs , playlists , users or artists' />
             </header>
             <div onClick={() => signOut()} className='absolute z-20 top-5 right-8 flex items-center bg-black bg-opacity-70 text-white space-x-3 opacity-90 hover:opacity-80 cursor-pointer rounded-full p-1 pr-2'>
                 <Image width={100} height={100} className='rounded-full w-7 h-7' src={session?.user.image} alt="profile pic" />

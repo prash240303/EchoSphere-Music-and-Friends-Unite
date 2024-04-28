@@ -73,78 +73,111 @@
 // }
 // export default HomeView;
 
-import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { signOut, useSession } from 'next-auth/react';
-import React, { useEffect, useRef, useState } from 'react';
-import FeaturedPlaylists from '../FeaturedPlaylists';
-import SearchResults from '../views/SearchResults';
-import RecentlyPlayedList from '../RecentlyPlayedList';
-import '../../styles/profilebutton.module.css';
-import Image from 'next/image';
-import Link from 'next/link';
-const HomeView = ({ setView, setGlobalPlaylistId, setGlobalCurrentSongId, setGlobalIsTrackPlaying, setGlobalArtistId }) => {
+import {
+  ChevronDownIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
+import { signOut, useSession } from "next-auth/react";
+import React, { useEffect, useRef, useState } from "react";
+import FeaturedPlaylists from "../FeaturedPlaylists";
+import SearchResults from "../views/SearchResults";
+import RecentlyPlayedList from "../RecentlyPlayedList";
+import "../../styles/profilebutton.module.css";
+import Image from "next/image";
+import Link from "next/link";
+
+import { shuffle } from "lodash";
+
+const colors = [
+  "from-indigo-500",
+  "from-blue-500",
+  "from-green-500",
+  "from-red-500",
+  "from-yellow-500",
+  "from-pink-500",
+  "from-purple-500",
+];
+
+const HomeView = ({
+  setView,
+  setGlobalPlaylistId,
+  setGlobalCurrentSongId,
+  setGlobalIsTrackPlaying,
+  setGlobalArtistId,
+}) => {
   const [isDropdownActive, setIsDropdownActive] = useState(false);
-  const { data: session } = useSession()
+  const { data: session } = useSession();
   const [isMenuOpen, setMenuOpen] = useState(false);
+
+ 
   const toggleDropdown = () => {
     setMenuOpen(!isMenuOpen);
     console.log(isMenuOpen);
   };
 
   return (
-    <div className='flex-grow h-screen overflow-y-auto'>
+    <div className="flex-grow h-screen overflow-y-auto">
       <div className={`absolute z-20 top-6 right-12 dropdownContainer `}>
-        <div className="dropdown-button hover:scale-110  border-4 rounded-full border-gray-600 dropdownButton text-white" >
-          <Image className='rounded-full  w-8 h-8 cursor-pointer' src={session?.user.image} alt="profile pic" onClick={toggleDropdown}  width={100} height={100} />
+        <div className="dropdown-button hover:scale-110  border-4 rounded-full border-gray-600 dropdownButton text-white">
+          <Image
+            className="rounded-full  w-8 h-8 cursor-pointer"
+            src={session?.user.image}
+            alt="profile pic"
+            onClick={toggleDropdown}
+            width={100}
+            height={100}
+          />
         </div>
       </div>
 
-      {!isMenuOpen && (
+      {isMenuOpen && (
         <div className=" text-white  z-20  absolute top-[74px] right-12  bg-spotify-gray rounded-lg shadow-2xl">
           <nav className="flex flex-col p-1 text-base ">
             <Link
               href=""
               onClick={() => setView("userProfile")} // Use a function reference
-              className='pl-4  py-3 rounded-lg hover:bg-gray-600'
+              className="pl-4  py-3 rounded-lg hover:bg-gray-600"
             >
               Profile
             </Link>
 
-            <Link
-              href=""
-              className='pl-4  py-3 rounded-lg hover:bg-gray-600'
-            >
+            <Link href="" className="pl-4  py-3 rounded-lg hover:bg-gray-600">
               Settings
             </Link>
             <Link
               href=""
-              className='pl-4 py-3 pr-4 rounded-lg hover:bg-gray-600'
-
+              className="pl-4 py-3 pr-4 rounded-lg hover:bg-gray-600"
             >
               Upgrade to Premium
             </Link>
-            <hr className='border-gray-600 my-1' />
-            <Link
-              href=""
-              className='pl-4 py-3  pr-4 rounded-lg hover:bg-gray-600'
+            <hr className="border-gray-600 my-1" />
+            <div
+              onClick={() => signOut()}
+              className="pl-4 py-3  pr-4 rounded-lg hover:bg-gray-600"
             >
               Log Out
-            </Link>
-
+            </div>
           </nav>
         </div>
       )}
-      <div className='mt-24'>
-        <RecentlyPlayedList setView={setView} setGlobalPlaylistId={setGlobalPlaylistId} />
+
+     
+      <div className="">
+        <RecentlyPlayedList
+          setView={setView}
+          setGlobalPlaylistId={setGlobalPlaylistId}
+        />
       </div>
-      <div className='mt-10 '>
+      <div className="mt-10 ">
         <FeaturedPlaylists
           setView={setView}
           setGlobalPlaylistId={setGlobalPlaylistId}
         />
       </div>
-    </div >
+      
+    </div>
+    
   );
-}
+};
 
 export default HomeView;
