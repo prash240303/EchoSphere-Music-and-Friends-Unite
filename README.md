@@ -19,6 +19,8 @@ A working clone of Spotify (except player)
  ## About The Project
  
 ![image](https://github.com/prash240303/Spotify-music-streaming-platform/assets/93905743/88a5ea11-3a7e-4f29-be8f-3cd12776a83d)
+![image](https://github.com/prash240303/Spotify-music-streaming-platform/assets/93905743/4922bb16-8b1d-4d88-802f-456cf6756a92)
+![image](https://github.com/prash240303/Spotify-music-streaming-platform/assets/93905743/272419ea-0e59-4b91-a694-280311f9ea9a)
 
 
 Welcome to Spotify Clone! This is a music streaming service designed to deliver a seamless listening experience. Discover new artists, create playlists, and explore curated content with ease.
