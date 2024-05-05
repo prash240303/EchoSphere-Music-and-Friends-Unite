@@ -1,3 +1,40 @@
+                         
+<br/>
+<div align="center">
+<a href="https://github.com/ShaanCoding/ReadME-Generator">
+<img src="https://dobrelajki.pl/wp-content/uploads/2019/12/spotify-download-logo-30.png" alt="Logo" width="80" height="80">
+</a>
+<h3 align="center">Spotify Music Steaming app (clone)</h3>
+<p align="center">
+A working clone of Spotify (except player) 
+
+<br/>
+<br/>
+<a href="https://spotify-clone-prashant.vercel.app/login">View Demo .</a>  
+<a href="https://github.com/prash240303/Spotify-music-streaming-platform/issues">Report Bug .</a>
+<a href="https://github.com/prash240303/Spotify-music-streaming-platform/pulls">Request Feature</a>
+</p>
+</div>
+
+ ## About The Project
+ 
+![image](https://github.com/prash240303/Spotify-music-streaming-platform/assets/93905743/88a5ea11-3a7e-4f29-be8f-3cd12776a83d)
+
+
+Welcome to Spotify Clone! This is a music streaming service designed to deliver a seamless listening experience. Discover new artists, create playlists, and explore curated content with ease.
+
+
+ ### Built With
+
+- [Next](https://nextjs.org)
+- [TailwindCSS](https://reactjs.org)
+- [NodeJS](https://vuejs.org)
+- [RESTful APIs](https://angular.io)
+- [Spotify API](https://svelte.dev)
+- [JWT auth](https://laravel.com)
+- [Next OAuth](https://getbootstrap.com)
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
